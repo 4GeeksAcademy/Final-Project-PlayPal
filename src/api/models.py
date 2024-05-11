@@ -11,7 +11,6 @@ class User(db.Model):
     region = db.Column(db.String)
     timezone = db.Column(db.String)
     languages = db.Column(db.String)
-<<<<<<< HEAD
     image = db.Column(db.LargeBinary) 
     xbox = db.Column(db.String)
     psn = db.Column(db.String)
@@ -19,22 +18,13 @@ class User(db.Model):
     google_play = db.Column(db.String)
     nintendo = db.Column(db.String)
     epic_id = db.Column(db.String)
-=======
-    image = db.Column(db.LargeBinary)  # Cambia <type> por el tipo de datos adecuado
-    xbox = db.Column(db.String, unique=True)
-    psn = db.Column(db.String, unique=True)
-    steam = db.Column(db.String, unique=True)
-    google_play = db.Column(db.String, unique=True)
-    nintendo = db.Column(db.String, unique=True)
-    epic_id = db.Column(db.String, unique=True)
->>>>>>> dcbcb0a18f29140f49562367135a9ba69a3c0384
     bio = db.Column(db.String)
     gender = db.Column(db.String)
     admin = db.Column(db.Boolean, unique=False, nullable=True)
 
 
     def __repr__(self):
-        return f'<User {self.id}>'
+        return f'<User {self.email}>'
 
     def serialize(self):
         return {
@@ -56,7 +46,6 @@ class User(db.Model):
             "admin": self.admin
         }
     
-<<<<<<< HEAD
 class Room(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
@@ -87,6 +76,3 @@ class Room(db.Model):
         }
 
 
-=======
-    
->>>>>>> dcbcb0a18f29140f49562367135a9ba69a3c0384
