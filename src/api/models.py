@@ -12,19 +12,19 @@ class User(db.Model):
     timezone = db.Column(db.String)
     languages = db.Column(db.String)
     image = db.Column(db.LargeBinary)  # Cambia <type> por el tipo de datos adecuado
-    xbox = db.Column(db.String)
-    psn = db.Column(db.String)
-    steam = db.Column(db.String)
-    google_play = db.Column(db.String)
-    nintendo = db.Column(db.String)
-    epic_id = db.Column(db.String)
+    xbox = db.Column(db.String, unique=True)
+    psn = db.Column(db.String, unique=True)
+    steam = db.Column(db.String, unique=True)
+    google_play = db.Column(db.String, unique=True)
+    nintendo = db.Column(db.String, unique=True)
+    epic_id = db.Column(db.String, unique=True)
     bio = db.Column(db.String)
     gender = db.Column(db.String)
     admin = db.Column(db.Boolean, unique=False, nullable=False)
 
 
     def __repr__(self):
-        return f'<User {self.email}>'
+        return f'<User {self.id}>'
 
     def serialize(self):
         return {
@@ -45,3 +45,5 @@ class User(db.Model):
             "gender": self.gender,
             "admin": self.admin
         }
+    
+    
