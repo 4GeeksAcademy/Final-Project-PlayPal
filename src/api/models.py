@@ -11,7 +11,7 @@ class User(db.Model):
     region = db.Column(db.String)
     timezone = db.Column(db.String)
     languages = db.Column(db.String)
-    image = db.Column(db.LargeBinary)  # Cambia <type> por el tipo de datos adecuado
+    image = db.Column(db.LargeBinary) 
     xbox = db.Column(db.String)
     psn = db.Column(db.String)
     steam = db.Column(db.String)
@@ -45,3 +45,34 @@ class User(db.Model):
             "gender": self.gender,
             "admin": self.admin
         }
+    
+class Room(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    date = db.Column(db.String, db.ForeignKey())
+    time = db.Column(db.String, db.ForeignKey())
+    room_name = db.Column(db.String(80), nullable=False)
+    game_name = db.Column(db.Integer, db.ForeignKey('game.id'), nullable=False)
+    platform = db.Column(db.String, db.ForeignKey('user.id'), nullable=False)
+    description = db.Column(db.String, nullable=False)
+    mood = db.Column(db.String, nullable=False)
+    reviews = db.Column(db.Integer)
+    in_room = db.Column(db.Integer, db.ForeignKey('in_room.id'), nullable=False)
+
+    def __repr__(self):
+        return f'<Room {self.id}>'
+    
+    def serialize(self):
+        return{
+            "id": self.id,
+            "user_id": self.user_id,
+            "date": self.date,
+            "time": self.time,
+            "room_name": self.room_name,
+            "platform": self.platform,
+            "description": self.description,
+            "mood": self.mood,
+            "members": self.in_room
+        }
+
+
