@@ -1,21 +1,36 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+			signUpData: {
+                email: '',
+                name: '',
+                password: '',
+                age: '',
+                region: '',
+                timezone: '', // You can handle timezones in UTC format
+                languages: '',
+                image: '',
+                xbox: '',
+                psn: '',
+                steam: '',
+                googlePlay: '',
+                nintendo: '',
+                epicId: '',
+                bio: '',
+                review: '',
+                gender: ''
+            }
 		},
 		actions: {
+
+			setSignUpData: (data) => {
+                const store = getStore();
+                setStore({
+                    signUpData: { ...store.signUpData, ...data }
+                });
+            },
+
+
 			// Use getActions to call a function within a fuction
 			exampleFunction: () => {
 				getActions().changeColor(0, "green");
