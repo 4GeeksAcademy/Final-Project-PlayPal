@@ -1,3 +1,11 @@
-/* 
-    General Styles used on every website (Don't Repeat Yourself)
-*/
+body {
+    background: linear-gradient(to bottom, #000000, #131E26, #3B5F79, #629DC8);
+    /* Evitar que el contenido se desborde del cuerpo */
+    overflow-x: hidden;
+    /* Establecer altura completa del cuerpo */
+    height: 100vh;
+    /* Establecer márgenes a 0 para evitar espacios adicionales */
+    margin: 0;
+    /* Establecer fuente predeterminada para el cuerpo */
+    font-family: Arial, sans-serif;
+}

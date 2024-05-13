@@ -1,25 +1,33 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			message: null,
-			demo: [
-				{
-					title: "FIRST",
-					background: "white",
-					initial: "white"
-				},
-				{
-					title: "SECOND",
-					background: "white",
-					initial: "white"
-				}
-			]
+		
 		},
 		actions: {
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			submitSignUpForm: async (signUpData) => {
+				try {
+					let response = await fetch("https://improved-engine-wgpw7pp55vx357pr-3001.app.github.dev/api/signup", {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(signUpData)
+					});
+		
+					if (!response.ok) {
+						throw new Error('Failed to create user');
+					}
+		
+					let data = await response.json();
+		
+					return true;
+				} catch (error) {
+					console.error('Error creating user:', error);
+					return false;
+				}
 			},
+	
+			
 
 			getMessage: async () => {
 				try{
