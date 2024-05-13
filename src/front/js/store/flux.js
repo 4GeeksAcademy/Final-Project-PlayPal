@@ -5,15 +5,16 @@ const getState = ({ getStore, getActions, setStore }) => {
 		},
 		actions: {
 			submitSignUpForm: async (signUpData) => {
+				console.log(signUpData)
 				try {
-					let response = await fetch("https://improved-engine-wgpw7pp55vx357pr-3001.app.github.dev/api/signup", {
+					let response = await fetch("https://curly-orbit-7jwx747q5j9hxqxq-3001.app.github.dev/api/signup", {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json'
 						},
 						body: JSON.stringify(signUpData)
 					});
-		
+					
 					if (!response.ok) {
 						throw new Error('Failed to create user');
 					}

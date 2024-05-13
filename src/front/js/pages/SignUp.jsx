@@ -22,8 +22,8 @@ export const SignUp = () => {
         nintendo: '',
         epicId: '',
         bio: '',
-        review: '',
-        gender: ''
+        gender: '',
+        admin: ''
     });
 
     const [error, setError] = useState(null);
@@ -53,23 +53,23 @@ return (
         <form onSubmit={handleSubmit}>
             <div>
                 <label htmlFor="email">Email:</label>
-                <input type="email" id="email" name="email" value={store.signUpData.email} onChange={handleInputChange} required />
+                <input type="email" id="email" name="email" value={signUpData.email} onChange={handleInputChange} required />
             </div>
             <div>
                 <label htmlFor="password">Password:</label>
-                <input type="password" id="password" name="password" value={store.signUpData.password} onChange={handleInputChange} required />
+                <input type="password" id="password" name="password" value={signUpData.password} onChange={handleInputChange} required />
             </div>
             <div>
                 <label htmlFor="name">Name:</label>
-                <input type="text" id="name" name="name" value={store.signUpData.name} onChange={handleInputChange} required />
+                <input type="text" id="name" name="name" value={signUpData.name} onChange={handleInputChange} required />
             </div>
             <div>
                 <label htmlFor="age">Age:</label>
-                <input type="number" id="age" name="age" value={store.signUpData.age} onChange={handleInputChange} required min="13" />
+                <input type="number" id="age" name="age" value={signUpData.age} onChange={handleInputChange} required min="13" />
             </div>
             <div>
                 <label htmlFor="gender">Gender:</label>
-                <select id="gender" name="gender" value={store.signUpData.gender} onChange={handleInputChange}>
+                <select id="gender" name="gender" value={signUpData.gender} onChange={handleInputChange}>
                     <option value="">Select</option>
                     <option value="male">Male</option>
                     <option value="female">Female</option>
@@ -78,11 +78,11 @@ return (
             </div>
             <div>
                 <label htmlFor="bio">Bio:</label>
-                <textarea id="bio" name="bio" value={store.signUpData.bio} onChange={handleInputChange}></textarea>
+                <textarea id="bio" name="bio" value={signUpData.bio} onChange={handleInputChange}></textarea>
             </div>
             <div>
                 <label htmlFor="languages">Languages:</label>
-                <select id="languages" name="languages" multiple value={store.signUpData.languages} onChange={handleInputChange}>
+                <select id="languages" name="languages" multiple value={signUpData.languages} onChange={handleInputChange}>
                     <option value="english">English</option>
                     <option value="spanish">Spanish</option>
                     <option value="french">French</option>
@@ -92,40 +92,39 @@ return (
 
             <div>
                 <label htmlFor="region">Region:</label>
-                <input type="text" id="region" name="region" value={store.signUpData.region} onChange={handleInputChange} />
+                <input type="text" id="region" name="region" value={signUpData.region} onChange={handleInputChange} />
             </div>
             <div>
                 <label htmlFor="timezone">Timezone:</label>
-                <input type="text" id="timezone" name="timezone" value={store.signUpData.timezone} onChange={handleInputChange} />
+                <input type="text" id="timezone" name="timezone" value={signUpData.timezone} onChange={handleInputChange} />
             </div>
             {/* Add instructions for platform usernames */}
             <h2>Platform Usernames (optional):</h2>
             <p>Add your available usernames for the following platforms:</p>
             <div>
                 <label htmlFor="xbox">Xbox:</label>
-                <input type="text" id="xbox" name="xbox" value={store.signUpData.xbox} onChange={handleInputChange} />
+                <input type="text" id="xbox" name="xbox" value={signUpData.xbox} onChange={handleInputChange} />
             </div>
             <div>
                 <label htmlFor="psn">PSN:</label>
-                <input type="text" id="psn" name="psn" value={store.signUpData.psn} onChange={handleInputChange} />
+                <input type="text" id="psn" name="psn" value={signUpData.psn} onChange={handleInputChange} />
             </div>
             <div>
                 <label htmlFor="steam">Steam:</label>
-                <input type="text" id="steam" name="steam" value={store.signUpData.steam} onChange={handleInputChange} />
+                <input type="text" id="steam" name="steam" value={signUpData.steam} onChange={handleInputChange} />
             </div>
             <div>
                 <label htmlFor="googlePlay">Google Play:</label>
-                <input type="text" id="googlePlay" name="googlePlay" value={store.signUpData.googlePlay} onChange={handleInputChange} />
+                <input type="text" id="googlePlay" name="googlePlay" value={signUpData.googlePlay} onChange={handleInputChange} />
             </div>
             <div>
                 <label htmlFor="nintendo">Nintendo:</label>
-                <input type="text" id="nintendo" name="nintendo" value={store.signUpData.nintendo} onChange={handleInputChange} />
+                <input type="text" id="nintendo" name="nintendo" value={signUpData.nintendo} onChange={handleInputChange} />
             </div>
             <div>
                 <label htmlFor="epicId">Epic ID:</label>
-                <input type="text" id="epicId" name="epicId" value={store.signUpData.epicId} onChange={handleInputChange} />
+                <input type="text" id="epicId" name="epicId" value={signUpData.epicId} onChange={handleInputChange} />
             </div>
-
 
             <button type="submit">Sign Up</button>
         </form>
