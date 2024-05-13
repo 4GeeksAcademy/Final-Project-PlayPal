@@ -1,40 +1,33 @@
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			signUpData: {
-                email: '',
-                name: '',
-                password: '',
-                age: '',
-                region: '',
-                timezone: '', // You can handle timezones in UTC format
-                languages: '',
-                image: '',
-                xbox: '',
-                psn: '',
-                steam: '',
-                googlePlay: '',
-                nintendo: '',
-                epicId: '',
-                bio: '',
-                review: '',
-                gender: ''
-            }
+		
 		},
 		actions: {
-
-			setSignUpData: (data) => {
-                const store = getStore();
-                setStore({
-                    signUpData: { ...store.signUpData, ...data }
-                });
-            },
-
-
-			// Use getActions to call a function within a fuction
-			exampleFunction: () => {
-				getActions().changeColor(0, "green");
+			submitSignUpForm: async (signUpData) => {
+				try {
+					let response = await fetch('/api/signup', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(signUpData)
+					});
+		
+					if (!response.ok) {
+						throw new Error('Failed to create user');
+					}
+		
+					let data = await response.json();
+		
+					return true;
+				} catch (error) {
+					console.error('Error creating user:', error);
+					return false;
+				}
 			},
+	
+			
 
 			getMessage: async () => {
 				try{
