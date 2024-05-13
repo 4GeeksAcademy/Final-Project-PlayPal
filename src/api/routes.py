@@ -30,6 +30,9 @@ def handle_hello():
 @api.route('/signup', methods=['POST'])
 def new_user():
     try:
+        sign_up_data = request.json
+        print("Datos recibidos en la solicitud:", sign_up_data)
+
         email = request.json.get('email')
         password = request.json.get('password')
         name = request.json.get('name')
@@ -41,12 +44,20 @@ def new_user():
         xbox = request.json.get('xbox')
         psn = request.json.get('psn')
         steam = request.json.get('steam')
-        google_play = request.json.get('google_play')
+        google_play = request.json.get('googlePlay')
         nintendo = request.json.get('nintendo')
-        epic_id = request.json.get('epic_id')
+        epic_id = request.json.get('epicId')
         bio = request.json.get('bio')
         gender = request.json.get('gender')
         admin = request.json.get('admin')
+    
+        # Convierte una variable de valor (" ") a booleano
+        if admin is not None:
+            admin = bool(admin)
+
+        # Las imagenes trabajan en formato Binary. Por los momento lo dejamos como none
+        if image == '': 
+            image = None
 
         if not email.strip() or not password.strip():
             return jsonify({"message": "Missing required fields: email or password"}), 400
