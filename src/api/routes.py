@@ -69,7 +69,7 @@ def new_user():
         if existing_user:
             return jsonify({'error': 'Email already exists.'}), 409
 
-        hashed_password = generate_password_hash(password)
+        hashed_password = generate_password_hash(password).decode("utf-8")
 
         new_user = User(
             email = email,
@@ -123,12 +123,9 @@ def get_token():
         if not login_user:
             return jsonify({'error': 'email/user not found.'}), 404
 
-        password_from_db = login_user.password
-        hashed_password_hex = password_from_db
-        hashed_password_bin = bytes.fromhex(hashed_password_hex[2:])
+    
+        true_o_false = check_password_hash(login_user.password, password)
 
-        true_o_false = check_password_hash(hashed_password_bin, password)
-        
         # Si es verdadero generamos un token y lo devuelve en una respuesta JSON:
         if true_o_false:
             expires = timedelta(days=1)  # pueden ser "hours", "minutes", "days","seconds"
