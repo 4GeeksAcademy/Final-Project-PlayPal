@@ -35,7 +35,7 @@ export const SignUp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const success = await submitSignUpForm(signUpData);
+            let success = await actions.submitSignUpForm(signUpData);
             if (success) {
                 navigate('/success');
             } else {

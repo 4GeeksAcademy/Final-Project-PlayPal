@@ -6,7 +6,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 		actions: {
 			submitSignUpForm: async (signUpData) => {
 				try {
-					let response = await fetch('/api/signup', {
+					let response = await fetch("https://improved-engine-wgpw7pp55vx357pr-3001.app.github.dev/api/signup", {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json'
