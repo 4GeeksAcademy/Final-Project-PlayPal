@@ -123,9 +123,8 @@ def get_token():
         if not login_user:
             return jsonify({'error': 'email/user not found.'}), 404
 
-    
         true_o_false = check_password_hash(login_user.password, password)
-
+        
         # Si es verdadero generamos un token y lo devuelve en una respuesta JSON:
         if true_o_false:
             expires = timedelta(days=1)  # pueden ser "hours", "minutes", "days","seconds"
