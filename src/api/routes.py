@@ -145,11 +145,24 @@ def get_current_games():
         serialized_games = []
 
         for game in current_games:
+            participants = []
+            for participant in game.room_participants:
+                participants.append({
+                    "participant_id": participant.user.id,
+                    "participant_name": participant.user.name,
+                    "confirmed": participant.confirmed
+                })
+
             serialized_game = {
                 "game_name": game.game.name,
                 "room_name": game.room_name,
                 "game_description": game.description,
-                "host_name": game.user.name
+                "host_name": game.user.name,
+                "date": game.date,
+                "time": game.time,
+                "platform": game.platform,
+                "mood": game.mood,
+                "participants": participants  
             }
             serialized_games.append(serialized_game)
 
@@ -157,3 +170,5 @@ def get_current_games():
     
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
