@@ -139,34 +139,34 @@ def get_token():
         return {"Error":"El email proporcionado no corresponde a ninguno registrado: " + str(e)}, 500
 
 @api.route('/home', methods=['GET'])
-def get_current_games():
+def get_current_rooms():
     try:
-        current_games = Room.query.all()
-        serialized_games = []
+        current_rooms = Room.query.all()
+        serialized_rooms = []
 
-        for game in current_games:
+        for room in current_rooms:
             participants = []
-            for participant in game.room_participants:
+            for participant in room.room_participants:
                 participants.append({
                     "participant_id": participant.user.id,
                     "participant_name": participant.user.name,
                     "confirmed": participant.confirmed
                 })
 
-            serialized_game = {
-                "game_name": game.game.name,
-                "room_name": game.room_name,
-                "game_description": game.description,
-                "host_name": game.user.name,
-                "date": game.date,
-                "time": game.time,
-                "platform": game.platform,
-                "mood": game.mood,
+            serialized_room = {
+                "game_name": room.game.name,
+                "room_name": room.room_name,
+                "game_description": room.description,
+                "host_name": room.user.name,
+                "date": room.date,
+                "time": room.time,
+                "platform": room.platform,
+                "mood": room.mood,
                 "participants": participants  
             }
-            serialized_games.append(serialized_game)
+            serialized_rooms.append(serialized_room)
 
-        return jsonify(serialized_games)
+        return jsonify(serialized_rooms)
     
     except Exception as e:
         return jsonify({"error": str(e)}), 500
