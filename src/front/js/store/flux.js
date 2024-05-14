@@ -1,3 +1,5 @@
+const apiUrl = process.env.BACKEND_URL
+
 const getState = ({ getStore, getActions, setStore }) => {
 
 	return {
@@ -10,7 +12,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			submitLogInForm: async (logInData) => {
 				try {
-					let response = await fetch("https://ideal-sniffle-64qjgqq5wqvhx459-3001.app.github.dev/api/login", {
+					let response = await fetch(`${apiUrl}/api/login`, {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json'
@@ -36,7 +38,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			submitSignUpForm: async (signUpData) => {
 				try {
-					let response = await fetch("https://ideal-sniffle-64qjgqq5wqvhx459-3001.app.github.dev/api/signup", {
+					let response = await fetch(`${apiUrl}/api/signup`, {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json'
