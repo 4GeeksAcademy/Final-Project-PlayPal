@@ -2,6 +2,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 	return {
 		store: {
+			rooms: []
 
 		},
 
@@ -55,7 +56,19 @@ const getState = ({ getStore, getActions, setStore }) => {
 				}
 			},
 
-
+			fetchRooms: async () => {
+				const store = getStore();
+			
+				try {
+					let response = await fetch("https://ideal-sniffle-64qjgqq5wqvhx459-3001.app.github.dev/api/home"); /* aqui debemos agregar la el header con la autentificacion */
+					if (!response.ok) throw new Error("Couldn't fetch current rooms");
+					let roomsData = await response.json();
+					setStore({...store, rooms: roomsData});
+					console.log(store.rooms)
+				} catch (error) {	
+					console.error(error);
+				}
+			},
 
 			getMessage: async () => {
 				try {
