@@ -4,10 +4,12 @@ const getState = ({ getStore, getActions, setStore }) => {
 		
 		},
 		actions: {
+			
+
 			submitSignUpForm: async (signUpData) => {
 				console.log(signUpData)
 				try {
-					let response = await fetch("https://curly-orbit-7jwx747q5j9hxqxq-3001.app.github.dev/api/signup", {
+					let response = await fetch("https://ideal-sniffle-64qjgqq5wqvhx459-3001.app.github.dev//api/signup", {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json'
