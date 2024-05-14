@@ -62,7 +62,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				const store = getStore();
 			
 				try {
-					let response = await fetch("https://ideal-sniffle-64qjgqq5wqvhx459-3001.app.github.dev/api/home"); /* aqui debemos agregar la el header con la autentificacion */
+					let response = await fetch(`${apiUrl}/api/home`); /* aqui debemos agregar la el header con la autentificacion */
 					if (!response.ok) throw new Error("Couldn't fetch current rooms");
 					let roomsData = await response.json();
 					setStore({...store, rooms: roomsData});
@@ -75,7 +75,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 			getMessage: async () => {
 				try {
 
-					const resp = await fetch("https://ideal-sniffle-64qjgqq5wqvhx459-3001.app.github.dev/api/hello")
+					const resp = await fetch(`${apiUrl}/api/hello`)
 					const data = await resp.json()
 					setStore({ message: data.message })
 
