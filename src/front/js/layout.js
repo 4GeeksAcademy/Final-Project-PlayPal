@@ -6,7 +6,8 @@ import { BackendURL } from "./component/backendURL";
 import { LogIn } from "./pages/LogIn.jsx";
 import { SignUp } from "./pages/SignUp.jsx";
 
-import { Home } from "./pages/home";
+/* import { Home } from "./pages/home"; */
+import { Home } from "./pages/Home.jsx";
 /* import { Demo } from "./pages/demo";
 import { Single } from "./pages/single"; */
 import injectContext from "./store/appContext";
