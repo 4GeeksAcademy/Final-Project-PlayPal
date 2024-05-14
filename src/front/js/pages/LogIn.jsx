@@ -1,23 +1,51 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useContext } from 'react';
+import { Context } from "../store/appContext";
+import { Link, useNavigate } from 'react-router-dom';
 
 export const LogIn = () => {
+    const navigate = useNavigate();
+    const { actions } = useContext(Context);
+    const [logInData, setLogInData] = useState({
+        email: '',
+        password: '',
+
+    });
+
+    const [error, setError] = useState(null);
+
+    const handleInputChange = (e) => {
+        setLogInData({ ...logInData, [e.target.name]: e.target.value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            let success = await actions.submitLogInForm(logInData);
+            if (success) {
+                navigate('/');
+            } else {
+                setError('Failed to create user. Please try again.');
+            }
+        } catch (error) {
+            setError('An unexpected error occurred. Please try again.');
+        }
+    };
     return (
         <div>
-        <h1>Log In</h1>
-        <form>
-            <label htmlFor="username">Username:</label>
-            <input type="text" id="username" name="username" />
+            <h1>Log In</h1>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="email">Email:</label>
+                <input type="email" id="email" name="email" onChange={handleInputChange} required />
 
-            <label htmlFor="password">Password:</label>
-            <input type="password" id="password" name="password" />
+                <label htmlFor="password">Password:</label>
+                <input type="password" id="password" name="password" onChange={handleInputChange} required />
 
-            <button type="submit">Log In</button>
-            <Link to="/signup">
-                <button>Sign Up</button>
-            </Link>
-        </form>
-    </div>
+                <button type="submit">Log In</button>
+                <Link to="/signup">
+                    <button>Sign Up</button>
+                </Link>
+            </form>
+        </div>
     );
 }
 

@@ -1,46 +1,71 @@
 const getState = ({ getStore, getActions, setStore }) => {
+
 	return {
 		store: {
-		
+
 		},
+
+
 		actions: {
-			
+
+			submitLogInForm: async (logInData) => {
+				try {
+					let response = await fetch("https://ideal-sniffle-64qjgqq5wqvhx459-3001.app.github.dev/api/login", {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify(logInData)
+					});
+					if (!response.ok) {
+						throw new Error('Failed to log in');
+					}
+
+					let data = await response.json
+					localStorage.setItem("jwt-token", data.token);
+
+					return true;
+				}
+				catch (error) {
+					console.error('Error logging user in:', error);
+					return false;
+				}
+
+
+			},
 
 			submitSignUpForm: async (signUpData) => {
-				console.log(signUpData)
 				try {
-					let response = await fetch("https://ideal-sniffle-64qjgqq5wqvhx459-3001.app.github.dev//api/signup", {
+					let response = await fetch("https://ideal-sniffle-64qjgqq5wqvhx459-3001.app.github.dev/api/signup", {
 						method: 'POST',
 						headers: {
 							'Content-Type': 'application/json'
 						},
 						body: JSON.stringify(signUpData)
 					});
-					
+
 					if (!response.ok) {
 						throw new Error('Failed to create user');
 					}
-		
-					let data = await response.json();
-		
+
 					return true;
 				} catch (error) {
 					console.error('Error creating user:', error);
 					return false;
 				}
 			},
-	
-			
+
+
 
 			getMessage: async () => {
-				try{
-					// fetching data from the backend
-					const resp = await fetch(process.env.BACKEND_URL + "/api/hello")
+				try {
+
+					const resp = await fetch("https://ideal-sniffle-64qjgqq5wqvhx459-3001.app.github.dev/api/hello")
 					const data = await resp.json()
 					setStore({ message: data.message })
-					// don't forget to return something, that is how the async resolves
+
 					return data;
-				}catch(error){
+				} catch (error) {
 					console.log("Error loading message from backend", error)
 				}
 			},

@@ -6,8 +6,8 @@ import { BackendURL } from "./component/backendURL";
 import { LogIn } from "./pages/LogIn.jsx";
 import { SignUp } from "./pages/SignUp.jsx";
 
-/* import { Home } from "./pages/home";
-import { Demo } from "./pages/demo";
+import { Home } from "./pages/home";
+/* import { Demo } from "./pages/demo";
 import { Single } from "./pages/single"; */
 import injectContext from "./store/appContext";
 
@@ -29,6 +29,7 @@ const Layout = () => {
                     <Navbar />
                     <Routes>
 
+                        <Route element={<Home />} path="/" />
                         <Route element={<LogIn />} path="/login" />
                         <Route element={<SignUp />} path="/signup" />
 
