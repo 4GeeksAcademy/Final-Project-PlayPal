@@ -11,7 +11,7 @@ class User(db.Model):
     region = db.Column(db.String)
     timezone = db.Column(db.String)
     languages = db.Column(db.String)
-    image = db.Column(db.LargeBinary)
+    # image = db.Column(db.LargeBinary)
     xbox = db.Column(db.String)
     psn = db.Column(db.String)
     steam = db.Column(db.String)
