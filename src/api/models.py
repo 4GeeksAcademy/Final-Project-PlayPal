@@ -58,8 +58,9 @@ class Room(db.Model):
     platform = db.Column(db.String, nullable=False)
     description = db.Column(db.String, nullable=False)
     mood = db.Column(db.String, nullable=False)
-    reviews = db.Column(db.Integer)
-    
+    reviews = db.Column(db.String)
+    room_size = db.Column(db.Integer, nullable=False)
+
     room_participants = db.relationship('Room_participant', backref='room', lazy=True)
     user = db.relationship('User', backref=db.backref('hosted_rooms', lazy=True))
     game = db.relationship('Games', backref=db.backref('rooms', lazy=True))
@@ -78,7 +79,8 @@ class Room(db.Model):
             "platform": self.platform,
             "description": self.description,
             "mood": self.mood,
-            "reviews": self.reviews
+            "reviews": self.reviews,
+            "room_size": self.room_size
         }
     
 class Games(db.Model):
