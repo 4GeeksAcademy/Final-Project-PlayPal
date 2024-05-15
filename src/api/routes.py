@@ -130,7 +130,7 @@ def get_token():
             expires = timedelta(days=1)  # pueden ser "hours", "minutes", "days","seconds"
             user_id = login_user.id
             access_token = create_access_token(identity=user_id, expires_delta=expires)
-            return jsonify({ 'access_token':access_token}), 200
+            return jsonify({ 'access_token':access_token, 'admin': login_user.admin}), 200
 
         else:
             return {"Error":"Contraseña  incorrecta"},404
