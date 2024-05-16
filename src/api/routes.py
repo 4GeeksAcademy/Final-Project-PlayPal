@@ -5,7 +5,7 @@ from flask import Flask, request, jsonify, url_for, Blueprint
 from api.models import db, User, Room, Games
 from api.utils import generate_sitemap, APIException
 from flask_cors import CORS
-from flask_bcrypt import generate_password_hash, check_password_hash
+from flask_bcrypt import Bcrypt
 from flask_jwt_extended import create_access_token, JWTManager, jwt_required, get_jwt_identity
 from datetime import timedelta
 import re
@@ -15,7 +15,7 @@ api = Blueprint('api', __name__)
 
 # Allow CORS requests to this API
 CORS(api)
-
+bcrypt = Bcrypt()
 
 @api.route('/hello', methods=['POST', 'GET'])
 def handle_hello():
@@ -40,7 +40,7 @@ def new_user():
         region = request.json.get('region')
         timezone = request.json.get('timezone')
         languages = request.json.get('languages')
-        image = request.json.get('image')
+        # image = request.json.get('image')
         xbox = request.json.get('xbox')
         psn = request.json.get('psn')
         steam = request.json.get('steam')
@@ -56,8 +56,8 @@ def new_user():
             admin = bool(admin)
 
         # Las imagenes trabajan en formato Binary. Por los momento lo dejamos como none
-        if image == '': 
-            image = None
+        # if image == '': 
+        #     image = None
 
         if not email.strip() or not password.strip():
             return jsonify({"message": "Missing required fields: email or password"}), 400
@@ -69,7 +69,9 @@ def new_user():
         if existing_user:
             return jsonify({'error': 'Email already exists.'}), 409
 
-        hashed_password = generate_password_hash(password).decode("utf-8")
+        hashed_password = bcrypt.generate_password_hash(password).decode("utf-8")
+
+        print("ESTE ES PASSWORD HASHEADO: ",hashed_password)
 
         new_user = User(
             email = email,
@@ -79,7 +81,7 @@ def new_user():
             region = region,
             timezone = timezone,
             languages = languages,
-            image = image,
+            # image = image,
             xbox = xbox,
             psn = psn,
             steam = steam,
@@ -123,11 +125,11 @@ def get_token():
         if not login_user:
             return jsonify({'error': 'email/user not found.'}), 404
 
-        true_o_false = check_password_hash(login_user.password, password)
+        true_o_false = bcrypt.check_password_hash(login_user.password, password)
         
         # Si es verdadero generamos un token y lo devuelve en una respuesta JSON:
         if true_o_false:
-            expires = timedelta(days=1)  # pueden ser "hours", "minutes", "days","seconds"
+            expires = timedelta(hours=1)  # pueden ser "hours", "minutes", "days","seconds"
             user_id = login_user.id
             access_token = create_access_token(identity=user_id, expires_delta=expires)
             return jsonify({ 'access_token':access_token, 'admin': login_user.admin}), 200
