@@ -8,9 +8,7 @@ export const LogIn = () => {
     const [logInData, setLogInData] = useState({
         email: '',
         password: '',
-
     });
-
     const [error, setError] = useState(null);
 
     const handleInputChange = (e) => {
@@ -24,15 +22,17 @@ export const LogIn = () => {
             if (success) {
                 navigate('/');
             } else {
-                setError('Failed to create user. Please try again.');
+                setError('Failed to log in. Please try again.');
             }
         } catch (error) {
             setError('An unexpected error occurred. Please try again.');
         }
     };
+
     return (
         <div>
             <h1>Log In</h1>
+            {error && <p className="error">{error}</p>} 
             <form onSubmit={handleSubmit}>
                 <label htmlFor="email">Email:</label>
                 <input type="email" id="email" name="email" onChange={handleInputChange} required />
@@ -42,11 +42,9 @@ export const LogIn = () => {
 
                 <button type="submit">Log In</button>
                 <Link to="/signup">
-                    <button>Sign Up</button>
+                    <button type="button">Sign Up</button>
                 </Link>
             </form>
         </div>
     );
-}
-
-
+};
