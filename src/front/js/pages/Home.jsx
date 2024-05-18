@@ -1,21 +1,25 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { Room } from '../component/Room.jsx'
+import React, { useContext, useEffect } from 'react';
+import { Room } from '../component/Room.jsx';
 import { Context } from "../store/appContext";
-import { Link, useNavigate } from 'react-router-dom';
 
 export const Home = () => {
-    const { actions} = useContext(Context);
+    const { store, actions } = useContext(Context);
 
     useEffect(() => {
-        actions.fetchRooms();
-    }, [])
+        actions.fetchRooms(); // Llamar a la acción de carga de salas
+    }, [actions]);
+
+    if (store.loadingRooms) { // Usar el estado de carga del store
+        return <div>Loading...</div>;
+    }
+
     return (
         <div>
             <div className="home-header">
                 <h1>Find your next pals to play</h1>
-                <input type="text" placeholder="Search.."></input>
+                <input type="text" placeholder="Search.." />
             </div>
-                <Room />
+            <Room />
             <div>
                 
             </div>

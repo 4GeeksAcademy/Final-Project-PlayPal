@@ -1,9 +1,9 @@
 import React, { useState, useContext } from 'react';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import { Context } from "../store/appContext";
 
 export const SignUp = () => {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
     const { actions } = useContext(Context);
 
     const [signUpData, setSignUpData] = useState({
@@ -14,7 +14,6 @@ export const SignUp = () => {
         region: '',
         timezone: '',
         languages: '',
-        image: '',
         xbox: '',
         psn: '',
         steam: '',
@@ -23,7 +22,7 @@ export const SignUp = () => {
         epicId: '',
         bio: '',
         gender: '',
-        admin: ''
+        admin: false
     });
 
     const [error, setError] = useState(null);
@@ -46,10 +45,10 @@ export const SignUp = () => {
         }
     };
 
-
     return (
         <div>
             <h1>Sign Up</h1>
+            {error && <p className="error">{error}</p>}
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="email">Email:</label>
@@ -86,10 +85,9 @@ export const SignUp = () => {
                         <option value="english">English</option>
                         <option value="spanish">Spanish</option>
                         <option value="french">French</option>
-                        {/* Add more languages as options */}
+                        
                     </select>
                 </div>
-
                 <div>
                     <label htmlFor="region">Region:</label>
                     <input type="text" id="region" name="region" value={signUpData.region} onChange={handleInputChange} />
@@ -98,7 +96,6 @@ export const SignUp = () => {
                     <label htmlFor="timezone">Timezone:</label>
                     <input type="text" id="timezone" name="timezone" value={signUpData.timezone} onChange={handleInputChange} />
                 </div>
-                {/* Add instructions for platform usernames */}
                 <h2>Platform Usernames (optional):</h2>
                 <p>Add your available usernames for the following platforms:</p>
                 <div>
@@ -131,6 +128,3 @@ export const SignUp = () => {
         </div>
     );
 };
-
-
-
