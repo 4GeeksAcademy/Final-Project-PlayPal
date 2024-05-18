@@ -4,24 +4,15 @@ db = SQLAlchemy()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(120), unique=True, nullable=False)
-<<<<<<< HEAD
+    email = db.Column(db.String(120), unique=True, nullable=False
     password = db.Column(db.String(2042), unique=False, nullable=False)
     username = db.Column(db.String(120), unique=False, nullable=False)
     first_name = db.Column(db.String(120))
     last_name = db.Column(db.String(120))
-=======
-    password = db.Column(db.String(256), unique=False, nullable=False)
-    name = db.Column(db.String, unique=False, nullable=False)
->>>>>>> 99ce37e665877343d092e70b6b0dfcb32fd8bdcc
     age = db.Column(db.Integer)
     region = db.Column(db.String)
     timezone = db.Column(db.String)
     languages = db.Column(db.String)
-<<<<<<< HEAD
-=======
-    # image = db.Column(db.LargeBinary)
->>>>>>> 99ce37e665877343d092e70b6b0dfcb32fd8bdcc
     xbox = db.Column(db.String)
     psn = db.Column(db.String)
     steam = db.Column(db.String)
@@ -41,7 +32,9 @@ class User(db.Model):
         return {
             "id": self.id,
             "email": self.email,
-            "name": self.name,
+            "username": self.username,
+						"first_name": self.first_name,
+						"last_name": self.last_name,
             "age": self.age,
             "region": self.region,
             "timezone": self.timezone,

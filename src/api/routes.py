@@ -42,10 +42,6 @@ def new_user():
         region = request.json.get('region')
         timezone = request.json.get('timezone')
         languages = request.json.get('languages')
-<<<<<<< HEAD
-=======
-        # image = request.json.get('image')
->>>>>>> 99ce37e665877343d092e70b6b0dfcb32fd8bdcc
         xbox = request.json.get('xbox')
         psn = request.json.get('psn')
         steam = request.json.get('steam')
@@ -88,10 +84,6 @@ def new_user():
             region = region,
             timezone = timezone,
             languages = languages,
-<<<<<<< HEAD
-=======
-            # image = image,
->>>>>>> 99ce37e665877343d092e70b6b0dfcb32fd8bdcc
             xbox = xbox,
             psn = psn,
             steam = steam,
@@ -142,9 +134,8 @@ def get_token():
             expires = timedelta(hours=1)  # pueden ser "hours", "minutes", "days","seconds"
             user_id = login_user.id
             access_token = create_access_token(identity=user_id, expires_delta=expires)
-<<<<<<< HEAD
             data_to_return = {
-                'access_token':access_token, 
+                'token':access_token, 
                 'admin': login_user.admin,
                 'email': login_user.email,
                 'username': login_user.username,
@@ -164,9 +155,7 @@ def get_token():
                 'gender': login_user.gender,
             }
             return jsonify(data_to_return), 200
-=======
-            return jsonify({ 'token':access_token, 'admin': login_user.admin}), 200
->>>>>>> 99ce37e665877343d092e70b6b0dfcb32fd8bdcc
+            
 
         else:
             return {"Error":"Contraseña  incorrecta"},404
