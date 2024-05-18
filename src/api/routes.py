@@ -35,12 +35,13 @@ def new_user():
 
         email = request.json.get('email')
         password = request.json.get('password')
-        name = request.json.get('name')
+        username = request.json.get('username')
+        first_name = request.json.get('firstName')
+        last_name = request.json.get('lastName')
         age = request.json.get('age')
         region = request.json.get('region')
         timezone = request.json.get('timezone')
         languages = request.json.get('languages')
-        image = request.json.get('image')
         xbox = request.json.get('xbox')
         psn = request.json.get('psn')
         steam = request.json.get('steam')
@@ -74,12 +75,13 @@ def new_user():
         new_user = User(
             email = email,
             password = hashed_password,
-            name = name,
+            username = username,
+            first_name = first_name,
+            last_name = last_name,
             age = age,
             region = region,
             timezone = timezone,
             languages = languages,
-            image = image,
             xbox = xbox,
             psn = psn,
             steam = steam,
@@ -130,7 +132,27 @@ def get_token():
             expires = timedelta(days=1)  # pueden ser "hours", "minutes", "days","seconds"
             user_id = login_user.id
             access_token = create_access_token(identity=user_id, expires_delta=expires)
-            return jsonify({ 'access_token':access_token, 'admin': login_user.admin}), 200
+            data_to_return = {
+                'access_token':access_token, 
+                'admin': login_user.admin,
+                'email': login_user.email,
+                'username': login_user.username,
+                'first_name': login_user.first_name,
+                'last_name': login_user.last_name,
+                'age': login_user.age,
+                'region': login_user.region,
+                'time_zone': login_user.time_zone,
+                'languages': login_user.languages,
+                'xbox': login_user.xbox,
+                'psn': login_user.psn,
+                'steam': login_user.steam,
+                'google_play': login_user.google_play,
+                'nintendo': login_user.nintendo,
+                'epic_id': login_user.epic_id,
+                'bio': login_user.bio,
+                'gender': login_user.gender,
+            }
+            return jsonify(data_to_return), 200
 
         else:
             return {"Error":"Contraseña  incorrecta"},404
