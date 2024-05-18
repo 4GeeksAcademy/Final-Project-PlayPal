@@ -4,7 +4,7 @@ db = SQLAlchemy()
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(120), unique=True, nullable=False
+    email = db.Column(db.String(120), unique=True, nullable=False)
     password = db.Column(db.String(2042), unique=False, nullable=False)
     username = db.Column(db.String(120), unique=False, nullable=False)
     first_name = db.Column(db.String(120))
